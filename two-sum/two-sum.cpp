@@ -1,3 +1,5 @@
+// O(n^2) Solution
+
 class Solution {
 public:
     vector<int> twoSum(vector<int>& nums, int target) {
