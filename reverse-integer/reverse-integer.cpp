@@ -2,45 +2,24 @@ class Solution {
 public:
     int reverse(int x) {
         
-        long long ans=0;
-        int count=0;
-        int sign = 0;
+        int rev=0;
         
-        if(x > 0)
-            sign=1;
-        else
-            sign=-1;
-        
-        int temp = abs(x);
-        
-        while(temp > 0)
+        while(x!=0)
         {
-            temp /= 10;
-            count++;
-        }
-        
-        count--;
-        
-        x=abs(x);
-        
-        while(x > 0)
-        {
-            ans += ((x%10)*(pow(10,count)));
+            int num = x%10;
             x /= 10;
-            count--;
+            
+            if (rev > INT_MAX/10 || (rev == INT_MAX / 10 && num > 7)) 
+                return 0;
+            
+            if (rev < INT_MIN/10 || (rev == INT_MIN / 10 && num < -8)) 
+                return 0;
+            
+            // INT_MAX = 2147483647 ..... INT_MAX/10 = 214748364 ... remainder = 7
+            // INT_MIN = -2147483648 ..... INT_MIN/10 = -214748364 ... remainder = 8
+            
+            rev = rev * 10 + num;
         }
-        
-        if(sign < 0)
-        {
-            ans *= -1;
-        }
-        
-        int leftRange = pow(-2,31);
-        int rightRange= pow(2,31)-1;
-        
-        if(ans < leftRange || ans > rightRange )
-            return 0;
-        
-        return int(ans);
+        return rev;
     }
 };
