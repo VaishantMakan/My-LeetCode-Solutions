@@ -5,6 +5,9 @@ public:
         if(strs.size() ==0)
             return "";
         
+        if(strs.size() ==1)
+            return strs[0];
+        
         int n = strs.size();
         
         string ans ="";
@@ -19,25 +22,15 @@ public:
                 min = temp;
             }
         }
+        
+        sort(strs.begin(), strs.end());
+        
         int count=0;
         
         for(int i=0;i<min;i++)
         {
-            int flag=0;
-            
-            for(int j=1;j<n;j++)
-            {
-                if(strs[j][i] != strs[j-1][i])
-                {
-                    flag=1;
-                    break;
-                }
-            }
-            
-            if(flag)
-            {
+            if(strs[0][i] != strs[n-1][i])
                 break;
-            }
             
             count++;
         }
