@@ -1,43 +1,25 @@
-#define ll long long
-
 class Solution {
 public:
     int lengthOfLongestSubstring(string s) {
         
-        ll length=0;
-        ll maxL = 0;
+        vector<int> lastIndex(128,-1);
+        int res=0;
+        int i=0; // starting index of the window
         
-        ll n = s.length();
-        
-        for(ll i=0,j=0;i<n;i++)
+        for(int j=0;j<s.length();j++)
         {
-            char c = s[i];
-            int flag=1;
+            // j will be the ending index of the window
             
-            for(ll k=j;k<i;k++)
-            {
-                if(s[k] == c)
-                {
-                    flag=0;
-                    j=k+1;
-                    i=j-1;
-                    break;
-                }
-            }
+            //first calculating the starting index 
+            i = max(i, lastIndex[s[j]]+1);
             
-            if(flag==1)
-            {
-                length++;
-                if(maxL < length)
-                {
-                    maxL=length;
-                }
-                continue;
-            }
+            //calculating window size
+            res = max(res, j-i+1);
             
-           length=0;
+            //calculating the last index of the current char 
+            lastIndex[s[j]]=j;
         }
         
-        return maxL;
+        return res;
     }
 };
