@@ -1,3 +1,4 @@
+[Discussion Post (created on 2/7/2021 at 18:41)](https://leetcode.com/problems/plus-one/discuss/1378628/C%2B%2B-Solution-...-easy-to-understand-100-faster)  
 <h2>66. Plus One</h2><h3>Easy</h3><hr><div><p>Given a <strong>non-empty</strong> array of decimal digits&nbsp;representing a non-negative integer, increment&nbsp;one to the integer.</p>
 
 <p>The digits are stored such that the most significant digit is at the head of the list, and each element in the array contains a single digit.</p>
