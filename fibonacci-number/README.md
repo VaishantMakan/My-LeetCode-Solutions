@@ -1,3 +1,4 @@
+[Discussion Post (created on 11/7/2021 at 16:12)](https://leetcode.com/problems/fibonacci-number/discuss/1397080/C%2B%2B-DP-100-faster-solution)  
 <h2>509. Fibonacci Number</h2><h3>Easy</h3><hr><div><p>The <b>Fibonacci numbers</b>, commonly denoted <code>F(n)</code> form a sequence, called the <b>Fibonacci sequence</b>, such that each number is the sum of the two preceding ones, starting from <code>0</code> and <code>1</code>. That is,</p>
 
 <pre>F(0) = 0, F(1) = 1
