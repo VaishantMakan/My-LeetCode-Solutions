@@ -11,7 +11,7 @@ public:
         
         for(int i=begin; i != candidates.size() && candidates[i]<=target; ++i)
         {
-            if(i==begin || candidates[i] != candidates[i-1])
+            if(i==begin || candidates[i]!=candidates[i-1])
             {
                 combination.push_back(candidates[i]);
                 helper(candidates,target-candidates[i],combination,result,i);
