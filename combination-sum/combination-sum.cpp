@@ -1,37 +1,34 @@
 class Solution {
 public:
+    vector<vector<int>> combinationSum(vector<int>& candidates, int target) {
+        
+        sort(candidates.begin(),candidates.end());
+        
+        vector<vector<int>>ans;
+        vector<int> curr;
+        int begin=0;
+        helper(ans,candidates,target, curr,begin);
+        return ans;
+    }
     
-    void helper(vector<int>& candidates, int target, vector<int>&combination, vector<vector<int>>&result, int begin)
+    void helper(vector<vector<int>>& a, vector<int>& c, int target, vector<int>& curr, int i)
     {
-        if(target==0)
+        if(target == 0)
         {
-            result.push_back(combination);
+            a.push_back(curr);
             return;
         }
         
-        for(int i=begin; i != candidates.size() && candidates[i]<=target; ++i)
+        for(int j=i;j<c.size();j++)
         {
-            if(i==begin || candidates[i]!=candidates[i-1])
+            if(target - c[j] < 0)
             {
-                combination.push_back(candidates[i]);
-                helper(candidates,target-candidates[i],combination,result,i);
-                combination.pop_back();
+                return;
             }
+            
+            curr.push_back(c[j]);
+            helper(a,c,target-c[j],curr,j);
+            curr.pop_back();
         }
-    }
-    
-    vector<vector<int>> combinationSum(vector<int>& candidates, int target) {
-        
-        sort(candidates.begin(), candidates.end());
-        
-        vector<vector<int>>result;
-        
-        vector<int>combination;
-        
-        int begin=0;
-        
-        helper(candidates,target,combination,result,begin);
-        
-        return result;
     }
 };
