@@ -7,7 +7,7 @@ public:
         for(int i=0;i<n;i++)
         {
             if(i==row)
-                continue;
+                break;
             
             if(curr[i][col] == 'Q')
                 return false;
@@ -24,17 +24,6 @@ public:
             tempI--;
             tempJ--;
         }
-        //going down
-        tempI=row+1;
-        tempJ= col+1;
-        while(tempI < n && tempJ < n)
-        {
-            if(curr[tempI][tempJ] == 'Q')
-                return false;
-            
-            tempI++;
-            tempJ++;
-        }
         
         //check right diagonal
         //going up
@@ -47,18 +36,6 @@ public:
             
             tempI--;
             tempJ++;
-        }
-        
-        //going down
-        tempI=row+1;
-        tempJ= col-1;
-        while(tempI < n && tempJ >= 0)
-        {
-            if(curr[tempI][tempJ] == 'Q')
-                return false;
-            
-            tempI++;
-            tempJ--;
         }
         
         return true;
