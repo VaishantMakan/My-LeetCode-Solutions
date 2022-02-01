@@ -25,7 +25,7 @@ public:
         
         int ans = helper(coins, index, amount, dp);
         
-        if(ans == INT_MAX-1 || ans == INT_MAX)
+        if(ans == INT_MAX-1)
             return -1;
         else
             return ans;
