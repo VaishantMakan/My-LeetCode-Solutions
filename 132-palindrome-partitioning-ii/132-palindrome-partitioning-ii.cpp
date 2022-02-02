@@ -52,7 +52,7 @@ public:
     
     int minCut(string str) {
         
-        cout<<str.size();
+        // cout<<str.size();
         if(checkPalindrome(str, 0, str.size()-1))
             return 0;
             
