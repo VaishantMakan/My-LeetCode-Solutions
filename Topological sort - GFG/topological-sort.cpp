@@ -8,7 +8,7 @@ class Solution
 	public:
 	//Function to return list containing vertices in Topological order. 
 	
-	void helper(int node, vector<int>& vis, vector<int> adj[], vector<int> &st)
+	void helper(int node, vector<int>& vis, vector<int> adj[], stack<int> &st)
 	{
 	    vis[node]=1;
 	    
@@ -20,16 +20,15 @@ class Solution
 	        }
 	    }
 	    
-	    st.push_back(node);
+	    st.push(node);
 	    
 	}
 	
 	vector<int> topoSort(int V, vector<int> adj[]) 
 	{
 	    // code here
-	   // stack<int>st;
+	    stack<int>st;
 	    vector<int>vis(V, 0);
-	    vector<int>st;
 	    
 	    for(int i=0;i<V;i++)
 	    {
@@ -40,10 +39,10 @@ class Solution
 	    }
 	    
 	    vector<int>ans;
-	    for(int i=st.size()-1;i>=0;i--)
+	    while(!st.empty())
 	    {
-	        ans.push_back(st.at(i));
-	       // st.pop();
+	        ans.push_back(st.top());
+	        st.pop();
 	    }
 	    
 	    return ans;
