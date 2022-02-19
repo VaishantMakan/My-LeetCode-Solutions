@@ -1,3 +1,5 @@
+// WITHOUT DEQUE
+
 /**
  * Definition for a binary tree node.
  * struct TreeNode {
@@ -18,44 +20,36 @@ public:
         if(root == NULL)
             return ans;
         
-        deque<TreeNode*>q;
-        q.push_back(root);
+        queue<TreeNode*>q;
+        q.push(root);
         
         bool oddLevel = true;
+        
         while(!q.empty())
         {
-            int n = q.size();
-            vector<int>level;
-            deque<TreeNode*>tempQ;
-            
-            for(int i=0;i<n;i++)
-            {
-                TreeNode* node = q.front();
-                q.pop_front();
+            int size = q.size();
+            vector<int> level; 
+
+            for(int i = 0;i<size;i++) 
+			{
+                TreeNode *node = q.front(); 
+                q.pop(); 
                 
-                if(oddLevel)
-                {
-                    if(node->left != NULL)
-                        tempQ.push_front(node->left);
-                    
-                    if(node->right != NULL)
-                        tempQ.push_front(node->right);
-                }
-                else
-                {
-                    if(node->right != NULL)
-                        tempQ.push_front(node->right);
-                
-                    if(node->left != NULL)
-                        tempQ.push_front(node->left);
-                }
-                
-                level.push_back(node->val);
+				if(node->left != NULL) 
+					q.push(node->left);
+ 
+                if(node->right != NULL) 
+					q.push(node->right); 
+
+                level.push_back(node->val); 
             }
             
-            q = tempQ;
+            if(oddLevel == false)
+                reverse(level.begin(), level.end());
+            
             oddLevel = !oddLevel;
-            ans.push_back(level);
+            
+            ans.push_back(level); 
         }
         return ans;
     }
