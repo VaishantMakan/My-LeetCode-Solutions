@@ -78,7 +78,7 @@ public:
         
         if(root->left == NULL && root->right == NULL) // leaf node
         {
-            if(root == delNode && delNodeParent == NULL)
+            if(root == delNode && delNodeParent == NULL) // if the tree has a single node only and it is to be deleted ...
             {
                 return NULL;
             }
