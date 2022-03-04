@@ -17,8 +17,6 @@ public:
         if(itr >= preorder.size())
             return itr;
         
-        cout<<itr<<endl;
-        
         int val = preorder[itr];
         
         // check if val in range 
@@ -28,11 +26,9 @@ public:
             TreeNode* newNode = new TreeNode(val);
             if(val < root->val)
             {
-                cout<<"yo"<<endl;
                 root->left = newNode;
                 int temp = itr+1;
                 newItr = helper(root->left, minV, root->val, preorder, temp);
-                cout<<"broooo"<<endl;
             }
             
             if(newItr >= preorder.size())
@@ -40,14 +36,12 @@ public:
             
             itr = newItr;
             val = preorder[itr];
-            cout<<"yoGo "<<itr<<endl;
             newNode = new TreeNode(val);
             
             if(val > minV && val < maxV)
             {
                 if(val > root->val)
                 {
-                    cout<<"yohey rotVal = "<<root->val<<" val = "<<val<<endl;
                     root->right = newNode;
                     int temp = itr+1;
                     itr = helper(root->right, root->val, maxV, preorder, temp);
