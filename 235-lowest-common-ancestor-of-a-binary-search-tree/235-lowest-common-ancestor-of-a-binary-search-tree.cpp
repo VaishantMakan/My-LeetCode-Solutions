@@ -10,6 +10,10 @@
  * };
  */
 
+// TC -> O(h)  , h -> height of the tree 
+// SC -> O(1)  , not considering recursion stack space 
+// You can also use iteration using while loop ....
+
 class Solution {
 public:
     TreeNode* lowestCommonAncestor(TreeNode* root, TreeNode* p, TreeNode* q) {
