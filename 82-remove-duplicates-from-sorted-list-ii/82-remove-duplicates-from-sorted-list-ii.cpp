@@ -57,7 +57,6 @@ public:
                 {
                     isHead = false;
                     prevNode = temp;
-                    // prevNode->next = NULL;
                     temp = temp->next;
                 }
                 else
@@ -75,3 +74,13 @@ public:
         return head;
     }
 };
+
+// Test cases to try 
+/*
+[1,1,1,2,2,3]
+[1,1]
+[1,2,2]
+[]
+[1,2,3,3,4,4,5]
+[1,1,1,2,3]
+*/
