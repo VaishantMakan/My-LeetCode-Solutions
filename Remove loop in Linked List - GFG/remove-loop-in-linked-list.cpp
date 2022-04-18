@@ -90,6 +90,8 @@ class Solution
         Node* meetNode = NULL;
         Node* prev = NULL;
         
+        // finding if there is loop present or not !!
+        
         while(fast != NULL && fast->next != NULL)
         {
             prev = slow;
@@ -103,17 +105,21 @@ class Solution
             }
         }
         
+        // checking if loop present or not 
         if(fast == NULL || fast->next == NULL)
             return;
         
+        // finding the starting point of the loop and the pointer previous to it
         slow = head;
         
+        // if the head of the list is the starting point of the loop 
         if(slow == meetNode)
         {
             prev->next = NULL;
             return;
         }
         
+        // else 
         while(meetNode != slow)
         {
             prev = meetNode;
@@ -121,6 +127,7 @@ class Solution
             slow = slow->next;
         }
         
+        // removing the loop
         prev->next = NULL;
         return;
     }
