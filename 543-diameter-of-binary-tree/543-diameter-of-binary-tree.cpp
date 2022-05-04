@@ -12,22 +12,23 @@
 class Solution {
 public:
     
-    int height(TreeNode* root, int &dm)
+    int helper(TreeNode* root, int &dm)
     {
         if(root == NULL)
             return 0;
         
-        int left = height(root->left, dm);
-        int right = height(root->right, dm);
+        int left_max_height = helper(root->left, dm);
+        int right_max_height = helper(root->right, dm);
         
-        dm = max(dm, left+right);
-        return 1+max(left, right);
+        dm = max(dm, left_max_height+right_max_height); // calculates and stores max diameter
+        
+        return 1 + max(left_max_height, right_max_height); // this returns the max height of the tree at this point
     }
     
     int diameterOfBinaryTree(TreeNode* root) {
         
-        int dm = 0;
-        height(root, dm);
+        int dm=0;
+        helper(root, dm);
         return dm;
     }
 };
