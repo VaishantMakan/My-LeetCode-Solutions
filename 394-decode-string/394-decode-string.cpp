@@ -17,7 +17,7 @@ public:
             index++;
         }
         
-        // if no number 
+        // if no number , then it can either be ] or some char
         if(num == 0)
         {
             if(s[index] == ']')
@@ -34,7 +34,8 @@ public:
             return ans;
         }
         
-        index++; // to skip [
+        // since last element was a num, hence curr element will be [
+        index++;    // to skip [
         
         while(s[index] != ']')
         {   
@@ -50,20 +51,21 @@ public:
             index++;
         }
         
-        index++;
+        index++; // to skip the last element i.e ] 
         
-        string temp = ans;
+        string temp = ans; // this will get repeated num times 
         
-        while(num-- != 1)
+        while(num-- != 1)  // since already added once before 
         {
             ans += temp;
         }
         
-        if(index < s.length() && s[index] != ']')
+        if(index < s.length() && s[index] != ']') // if after ] there is still some char or num
         {   
             ans += helper(s, index);
         }
         
+        // now the curr index element is ] , so we just return 
         return ans;
     }
     
