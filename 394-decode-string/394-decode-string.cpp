@@ -22,8 +22,6 @@ public:
         {
             if(s[index] == ']')
             {
-                // index++;
-                // cout<<index<<endl;
                 return ans;
             }
             
@@ -63,7 +61,6 @@ public:
         
         if(index < s.length() && s[index] != ']')
         {   
-            // cout<<"yo: "<<index<<endl;
             ans += helper(s, index);
         }
         
