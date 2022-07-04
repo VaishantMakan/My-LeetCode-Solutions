@@ -1,37 +1,17 @@
 class Solution {
 public:
-    
-    bool helper(vector<int>& nums, int index, vector<int>& dp)
-    {
-        if(index == nums.size()-1)
-            return true;
-        
-        if(index >= nums.size())
-            return false;
-        
-        if(nums[index] == 0)
-            return false;
-        
-        if(dp[index] != -1)
-            return dp[index];
-        
-        for(int j=nums[index]; j > 0; j--)
-        {
-            bool ans = helper(nums, index + j, dp);
-            
-            if(ans)
-                return dp[index] = true;
-        }
-        
-        return dp[index] = false;
-    }
-    
     bool canJump(vector<int>& nums) {
         
-        int n = nums.size();
+        int lastGoodIndex = nums.size()-1;
         
-        vector<int> dp(n, -1);
+        for(int i=nums.size()-1; i>=0; i--)
+        {
+            if(i + nums[i] >= lastGoodIndex)
+            {
+                lastGoodIndex = i;
+            }
+        }
         
-        return helper(nums, 0, dp);
+        return lastGoodIndex == 0;
     }
 };
