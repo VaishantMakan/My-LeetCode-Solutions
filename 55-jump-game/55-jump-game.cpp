@@ -15,7 +15,7 @@ public:
         if(dp[index] != -1)
             return dp[index];
         
-        for(int j=1; j <= nums[index]; j++)
+        for(int j=nums[index]; j > 0; j--)
         {
             bool ans = helper(nums, index + j, dp);
             
