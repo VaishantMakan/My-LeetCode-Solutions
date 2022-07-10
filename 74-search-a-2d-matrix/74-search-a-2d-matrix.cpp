@@ -1,3 +1,5 @@
+// TC -> O(Log(N) + Log(M))
+
 class Solution {
 public:
     bool searchMatrix(vector<vector<int>>& matrix, int target) {
