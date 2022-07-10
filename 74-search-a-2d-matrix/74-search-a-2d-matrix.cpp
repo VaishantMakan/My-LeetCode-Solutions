@@ -7,20 +7,30 @@ public:
         
         int row = -1;
         
-        for(int i=0; i<n; i++)
+        int low = 0;
+        int high = n-1;
+        
+        while(low <= high)
         {
-            if(target >= matrix[i][0] && target <= matrix[i][m-1])
+            int mid = low + (high - low)/2;
+            
+            if(target >= matrix[mid][0] && target <= matrix[mid][m-1])
             {
-                row = i;
+                row = mid;
                 break;
             }
+            
+            if(target < matrix[mid][m-1])
+                high = mid-1;
+            else
+                low = mid+1;
         }
         
         if(row == -1)
             return false;
         
-        int low = 0;
-        int high = m-1;
+        low = 0;
+        high = m-1;
         
         while(low <= high)
         {
