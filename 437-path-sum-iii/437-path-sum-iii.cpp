@@ -1,3 +1,5 @@
+// O( N ) solution 
+
 /**
  * Definition for a binary tree node.
  * struct TreeNode {
@@ -10,35 +12,41 @@
  * };
  */
 
-#define ll long long
-
+#define ll long long 
 class Solution {
 public:
     
+    unordered_map<ll, ll>m;
     int ans=0;
     
-    void dfs(TreeNode* root, ll sum)
+    void helper(TreeNode* root, int target, ll curr)
     {
         if(root == NULL)
             return;
         
-        if(root->val == sum)
+        curr += root->val;
+        
+        if(curr == target)
             ans += 1;
         
-        dfs(root->left, sum-root->val);
-        dfs(root->right, sum-root->val);
-    
+        if(m.find(curr-target) != m.end())
+            ans += m[curr-target];
+        
+        m[curr]++;
+        
+        helper(root->left, target, curr);
+        helper(root->right, target, curr);
+        
+        m[curr]--;
     }
     
     int pathSum(TreeNode* root, int targetSum) {
         
         if(root == NULL)
-            return 0;
+            return ans;
         
-        dfs(root, targetSum);
-        
-        pathSum(root->left, targetSum);
-        pathSum(root->right, targetSum);
+        ll curr = 0;
+        helper(root, targetSum, curr);
         
         return ans;
     }
