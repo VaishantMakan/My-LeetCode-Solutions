@@ -1,39 +1,42 @@
+
 class Solution {
 public:
     bool checkInclusion(string s1, string s2) {
         
-        vector<int>curr(26, 0);
-        vector<int>req(26, 0);
-        
         int n = s1.size();
         int m = s2.size();
         
-        if(n==0 && m==0)
-            return true;
+        unordered_map<char,int>mp;
         
-        if(n > m || n==0)
-            return false;
-        
-        int i=0;
-        for(; i<n; i++)
-        {
-            req[s1[i] - 'a']++;
-            curr[s2[i] - 'a']++;
-        }
-        
-        if(curr == req)
-            return true;
-        
+        int matched = 0;
         int s=0;
         
-        for(; i<m; i++)
+        for(int i=0; i<n; i++)
+            mp[s1[i]]++;
+        
+        for(int e=0; e<m; e++)
         {
-            curr[s2[s] - 'a']--;
-            s++;
+            if(mp.find(s2[e]) != mp.end())
+            {
+                mp[s2[e]]--;
+                
+                if(mp[s2[e]] == 0)
+                    matched++;
+            }
             
-            curr[s2[i] - 'a']++;
+            if(e-s+1 > n)
+            {
+                if(mp.find(s2[s]) != mp.end())
+                {
+                    if(mp[s2[s]] == 0)
+                        matched--;
+                    
+                    mp[s2[s]]++;
+                }
+                s++;
+            }
             
-            if(curr == req)
+            if(matched == mp.size())
                 return true;
         }
         
