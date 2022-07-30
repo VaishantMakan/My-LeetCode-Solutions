@@ -2,108 +2,33 @@ class Solution {
 public:
     string addBinary(string a, string b) {
         
-        int n = a.length() - 1;
-        int m = b.length() - 1;
+        int n = a.length()-1;
+        int m = b.length()-1;
         
         string ans = "";
-        bool carry = false;
         
-        while(n >= 0 && m >= 0)
-        {
-            if(a[n] == '0' && b[m] == '0')
-            {
-                if(carry)
-                {
-                    ans += '1';
-                    carry = false;
-                }
-                else {
-                    ans += '0';
-                }
-            }
-            else if(a[n] == '1' && b[m] == '1')
-            {
-                if(carry)
-                {
-                    ans += '1';
-                    carry = true;
-                }
-                else {
-                    ans += '0';
-                    carry = true;
-                }
-            }
-            else
-            {
-                if(carry)
-                {
-                    ans += '0';
-                    carry = true;
-                }
-                else {
-                    ans += '1';
-                }
-            }
-            
-            n--;
-            m--;
-        }
+        int carry=0;
         
-        while(n>=0)
+        while(n >= 0 || m >=0)
         {
-            if(carry)
-            {
-                if(a[n]=='1')
-                {
-                    ans += '0';
-                    carry = true;
-                }
-                else
-                {
-                    ans += '1';
-                    carry = false;
-                }
-            }
-            else {
-                ans += a[n];
-            }
+            int sum = carry;
             
-            n--;
-        }
-        
-        while(m>=0)
-        {
-            if(carry)
-            {
-                if(b[m]=='1')
-                {
-                    ans += '0';
-                    carry = true;
-                }
-                else
-                {
-                    ans += '1';
-                    carry = false;
-                }
-            }
-            else {
-                ans += b[m];
-            }
+            if(n >= 0)
+                sum += a[n--] - '0';
             
-            m--;
+            if(m >= 0)
+                sum += b[m--] - '0';
+            
+            carry = sum > 1 ? 1 : 0;
+            
+            ans += to_string(sum%2);
+            
         }
         
         if(carry)
-            ans += '1';
-    
-        int i=0;
-        int j=ans.length()-1;
-    
-        while(i <= j)
-        {
-            swap(ans[i++], ans[j--]);
-        }
+            ans += to_string(carry);
         
+        reverse(ans.begin(), ans.end());
         return ans;
     }
 };
