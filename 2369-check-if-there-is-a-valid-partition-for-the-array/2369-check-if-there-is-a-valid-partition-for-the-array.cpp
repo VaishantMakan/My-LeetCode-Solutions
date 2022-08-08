@@ -3,43 +3,47 @@
 // check for 2 consicutive are equal
 // check for 3 consicutive are equal
 // check for 3 increasing numbers
+// Recursively call for above conditions and use memorisation fo faster execution
 
 class Solution {
 public:
     
-    // Recursion + memoisation 
-    int helper(vector<int>&nums,int i,vector<int>&dp)
+    bool helper(vector<int>& nums, int index, vector<int>& dp)
     {
         int n = nums.size();
         
-        if(i>=n)      //reached till end
-            return 1;
-    
-        if(dp[i]!=-1) 
-            return dp[i];
+        if(index >= n)
+            return true;
         
-        int p2=0,p3=0;
-      
-        if(i+1<n)
+        if(dp[index] != -1)
+            return dp[index];
+        
+        bool two = false;
+        bool three = false;
+        
+        // for two 
+        if(index+1 < n)
         {
-            p2 = (nums[i]==nums[i+1]);
+            two = nums[index] == nums[index+1];
+            
+            two = two && helper(nums, index+2, dp);
         }
-        if(i+2<n)
+        
+        // for three 
+        if(index+1 < n && index + 2 < n)
         {
-            p3 = ((nums[i]==nums[i+1] && nums[i+1]==nums[i+2]) || (nums[i]+1 == nums[i+1] && nums[i+1]+1==nums[i+2])); 
+            three = (nums[index] == nums[index+1] && nums[index] == nums[index+2]) || (nums[index]+1 == nums[index+1] && nums[index]+2 == nums[index+2]);
+            
+            three = three && helper(nums, index+3, dp);
         }
         
-       return dp[i] = min(1, ( p2 * helper(nums,i+2,dp) + p3 * helper(nums,i+3,dp) ) );
-        
+        return dp[index] = two || three;
     }
     
-    bool validPartition(vector<int>& nums) 
-    {
-        int n = nums.size();
+    bool validPartition(vector<int>& nums) {
         
-        vector<int>dp(n+1,-1);
+        vector<int>dp(nums.size(), -1);
         
-        return helper(nums,0,dp);     
+        return helper(nums, 0, dp);
     }
-    
 };
