@@ -1,3 +1,6 @@
+// Variation of LCS 
+// Reverse the string and try to find the longest common subsequence between orignal string and reversed string 
+
 class Solution {
 public:
     int longestPalindromeSubseq(string s) {
