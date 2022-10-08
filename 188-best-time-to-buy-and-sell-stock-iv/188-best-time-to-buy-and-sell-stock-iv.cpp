@@ -9,14 +9,17 @@ public:
         
         int n = prices.size();
         
-        vector<vector<int>>dp(n+1, vector<int>(k*2+1, 0));
+        // vector<vector<int>>dp(n+1, vector<int>(k*2+1, 0));
+        
+        vector<int>curr(k*2+1, 0);
+        vector<int>after(k*2+1, 0);
         
         for(int day = n-1; day>=0; day--)
         {
             for(int transactionsLeft = k*2-1; transactionsLeft >= 0; transactionsLeft--)
             {
                 //no transaction
-                int ans1 = dp[day+1][transactionsLeft];
+                int ans1 = after[transactionsLeft];
 
                 //transaction
                 int ans2=0;
@@ -25,17 +28,19 @@ public:
 
                 if(buy)
                 {
-                    ans2 = -prices[day] + dp[day+1][transactionsLeft+1];
+                    ans2 = -prices[day] + after[transactionsLeft+1];
                 }
                 else
                 {
-                    ans2 = prices[day] + dp[day+1][transactionsLeft+1];
+                    ans2 = prices[day] + after[transactionsLeft+1];
                 }
 
-                dp[day][transactionsLeft] = max(ans1, ans2);
+                curr[transactionsLeft] = max(ans1, ans2);
             }
+            
+            after=curr;
         }
         
-        return dp[0][0];
+        return after[0];
     }
 };
