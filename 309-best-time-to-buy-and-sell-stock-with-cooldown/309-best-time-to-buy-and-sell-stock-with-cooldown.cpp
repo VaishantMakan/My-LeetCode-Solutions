@@ -31,8 +31,35 @@ public:
         
         int n = prices.size();
         
-        vector<vector<int>>dp(n, vector<int>(2, -1));
+//         vector<vector<int>>dp(n, vector<int>(2, -1));
         
-        return helper(prices, 0, 1, dp);
+//         return helper(prices, 0, 1, dp);
+        
+        vector<vector<int>>dp(n+2, vector<int>(2, 0));
+        
+        for(int day=n-1; day >= 0; day--)
+        {
+            for(int buy=1; buy>=0; buy--)
+            {
+                if(buy)
+                {
+                    int take = -prices[day] + dp[day+1][0];
+
+                    int notTake = 0 + dp[day+1][1];
+
+                    dp[day][buy] = max(take, notTake);
+                }
+                else
+                {
+                    int take = prices[day] + dp[day+2][1];
+
+                    int notTake = 0 + dp[day+1][0];
+
+                    dp[day][buy] = max(take, notTake);
+                }
+            }
+        }
+        
+        return dp[0][1];
     }
 };
