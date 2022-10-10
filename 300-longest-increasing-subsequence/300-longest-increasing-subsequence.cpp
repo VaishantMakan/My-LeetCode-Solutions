@@ -1,8 +1,37 @@
-// Approcah - 1 - Top Down - Memoization 
-
 class Solution {
 public:
     
+//     int helper(vector<int>& nums, int i, int prev, vector<vector<int>>& dp)
+//     {
+//         if(i >= nums.size())
+//         {
+//             return 0;
+//         }
+        
+//         if(dp[i][prev+1] != -1)
+//             return dp[i][prev+1];
+        
+//         //pick
+//         int pick=0;
+//         if(prev == -1 || (prev != -1 && nums[i] > nums[prev]))
+//         {
+//             pick = 1 + helper(nums, i+1, i, dp);
+//         }
+        
+//         //not pick 
+//         int notPick = helper(nums, i+1, prev, dp);
+        
+//         return dp[i][prev+1] = max(pick, notPick);
+//     }
+    
+//     int lengthOfLIS(vector<int>& nums) {
+        
+//         vector<vector<int>>dp(nums.size(), vector<int>(nums.size() + 1, -1));
+        
+//         return helper(nums, 0, -1, dp);
+//     }
+    
+
     int helper(vector<int>& nums, int index, int prevI, vector<vector<int>>&dp)
     {
         if(index >= nums.size())
@@ -26,32 +55,3 @@ public:
         return helper(nums, 0, -1, dp);
     }
 };
-
-// Approach - 2 - DP - Bottom Up - Tabular 
-
-// class Solution {
-// public:
-    
-//     int lengthOfLIS(vector<int>& nums) {
-        
-//         vector<int>dp(nums.size(), 0);
-        
-//         int ans = 0;
-//         int n = nums.size();
-        
-//         for(int i=0;i<n;i++)
-//         {
-//             dp[i] = 1; 
-//             for(int j=0;j<i;j++)
-//             {
-//                 if(nums[i] > nums[j])
-//                 {
-//                     dp[i] = max(dp[i], dp[j] + 1);
-//                 }
-//             }
-//             ans = max(ans, dp[i]);
-//         }
-        
-//         return ans;
-//     }
-// };
