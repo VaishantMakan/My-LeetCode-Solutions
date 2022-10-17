@@ -4,37 +4,23 @@ class Solution {
 public:
     long long maximumImportance(int n, vector<vector<int>>& roads) {
         
-        ll m = roads.size();
+        vector<ll> deg(n, 0);
         
-        map<ll, ll>mp;
-        
-        for(ll i=0;i<m;i++)
+        for(ll i=0;i<roads.size(); i++)
         {
-            mp[roads[i][0]]++;
-            mp[roads[i][1]]++;
+            deg[roads[i][0]]++;
+            deg[roads[i][1]]++;
         }
         
-        //sorting the edges by their degrees
-        vector<pair<ll, ll>> indeg(n);
+        sort(deg.begin(), deg.end());
         
-        for(ll i=0;i<n;i++)
-        {
-            if(mp.find(i) != mp.end())
-                indeg[i] = {mp[i], i};
-            else
-                indeg[i] = {0, i};
-        }
-        
-        sort(indeg.begin(), indeg.end());
-        
-        ll imp = 1;
         ll sum=0;
+        ll imp=1;
         
         for(ll i=0;i<n;i++)
         {
-            sum = sum + (indeg[i].first * imp);
+            sum += deg[i]*imp;
             imp++;
-                
         }
         
         return sum;
