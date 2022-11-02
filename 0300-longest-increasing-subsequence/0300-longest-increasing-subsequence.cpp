@@ -1,56 +1,29 @@
-// TC -> O(n^2)
-// SC -> O(n)
-// Printing the LIS too
+// BINARY SEARCH Solution 
+//TC -> O(NLogN)
+//SC -> O(N)
 
 class Solution {
 public:
     int lengthOfLIS(vector<int>& nums) {
-         
+        
         int n = nums.size();
         
-        vector<int>dp(n, 1);
+        vector<int>temp;
+        temp.push_back(nums[0]);
         
-        vector<int>prev(n);
-        
-        int maxi = 0;
-        int lastIndex = 0;
-        
-        for(int i=0;i<n;i++)
+        for(int i=1;i<n;i++)
         {
-            prev[i] = i;
-            
-            for(int j=0;j<i;j++)
+            if(nums[i] > temp.back())
             {
-                if((nums[j] < nums[i]) && (1 + dp[j] > dp[i]))
-                {
-                    dp[i] = 1 + dp[j];
-                    prev[i] = j;
-                }
+                temp.push_back(nums[i]);
             }
-
-            if(dp[i] > maxi)
+            else
             {
-                maxi = dp[i];
-                lastIndex = i;
+                int ind = lower_bound(temp.begin(), temp.end(), nums[i]) - temp.begin();
+                temp[ind] = nums[i];
             }
         }
         
-        //printing the LIS
-        
-        vector<int>lis;
-        lis.push_back(nums[lastIndex]);
-        
-        while(prev[lastIndex] != lastIndex)
-        {
-            lastIndex = prev[lastIndex];
-            lis.push_back(nums[lastIndex]);
-        }
-        
-        reverse(lis.begin(), lis.end());
-        
-        for(int i=0;i<lis.size();i++)
-            cout<<lis[i]<<" ";
-        
-        return maxi;
+        return temp.size();
     }
 };
