@@ -9,8 +9,6 @@ public:
         if(dp[i] != -1)
             return dp[i];
         
-        int sum=0;
-        
         int maxi = -1e9;
         
         int ans=0;
