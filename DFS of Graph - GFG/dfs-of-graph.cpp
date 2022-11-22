@@ -1,37 +1,40 @@
-// { Driver Code Starts
+//{ Driver Code Starts
 #include <bits/stdc++.h>
 using namespace std;
 
- // } Driver Code Ends
+// } Driver Code Ends
 class Solution {
   public:
   
-    vector<int> helper(int node, vector<int> &vis, vector<int> adj[], vector<int> &ans)
+    void dfs(int V, vector<int> adj[], vector<int>& vis, vector<int>& ans, int node)
     {
         vis[node] = 1;
+        
         ans.push_back(node);
         
-        for(auto itr:adj[node])
+        for(auto& it: adj[node])
         {
-            if(!vis[itr])
+            if(vis[it] == 0)
             {
-                helper(itr, vis, adj, ans);
+                dfs(V, adj, vis, ans, it);
             }
         }
-        return ans;
     }
-    
+  
     // Function to return a list containing the DFS traversal of the graph.
     vector<int> dfsOfGraph(int V, vector<int> adj[]) {
         // Code here
+        vector<int>vis(V, 0);
         
-        vector<int>vis(V,0);
         vector<int>ans;
-        return helper(0, vis, adj, ans);
+        
+        dfs(V, adj, vis, ans, 0);
+        
+        return ans;
     }
 };
 
-// { Driver Code Starts.
+//{ Driver Code Starts.
 int main() {
     int tc;
     cin >> tc;
@@ -57,4 +60,5 @@ int main() {
         cout << endl;
     }
     return 0;
-}  // } Driver Code Ends
+}
+// } Driver Code Ends
