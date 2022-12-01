@@ -1,3 +1,9 @@
+//help: https://www.youtube.com/watch?v=u-yWemKGWO0&ab_channel=takeUforward
+
+//imp points:
+//1. no. of nodes if perfect binary tree (complete binary tree + last level fully filled) = (2^n) - 1
+//2. subtree of a complete binary tree is also complete bianry tree
+
 /**
  * Definition for a binary tree node.
  * struct TreeNode {
@@ -16,24 +22,28 @@ public:
         if(root == NULL)
             return 0;
         
-        TreeNode *l = root, *r = root;
-        int hl=0, hr=0;
+        int lh=0;
+        int rh=0;
         
-        while(l)
+        TreeNode* temp = root;
+        
+        while(temp)
         {
-            hl++;
-            l=l->left;
+            lh++;
+            temp = temp->left;
         }
         
-        while(r)
+        temp = root;
+        
+        while(temp)
         {
-            hr++;
-            r=r->right;
+            rh++;
+            temp = temp->right;
         }
         
-        if(hl==hr)
-            return pow(2, hl)-1;
+        if(lh == rh)
+            return pow(2, lh) - 1;
         
-        return 1+countNodes(root->left)+countNodes(root->right);
+        return 1 + countNodes(root->left) + countNodes(root->right);
     }
 };
