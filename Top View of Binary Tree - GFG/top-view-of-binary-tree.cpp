@@ -1,4 +1,4 @@
-// { Driver Code Starts
+//{ Driver Code Starts
 //Initial Template for C++
 
 #include <bits/stdc++.h>
@@ -88,9 +88,7 @@ Node* buildTree(string str)
 }
 
 
- // } Driver Code Ends
-
-
+// } Driver Code Ends
 /*
 struct Node
 {
@@ -107,34 +105,39 @@ class Solution
     vector<int> topView(Node *root)
     {
         //Your code here
-        vector<int>ans;
-        map<int,int>m;
-        queue<pair<Node*, int>> q;
+        map<int, int>mp;
         
-        if(root == NULL)
-            return ans;
-            
+        vector<int> ans;
+        
+        queue<pair<Node*, int>>q;
         q.push({root, 0});
         
         while(!q.empty())
         {
-            auto temp = q.front();
-            q.pop();
+            int n = q.size();
             
-            Node* node = temp.first;
-            int line = temp.second;
-            
-            if(m.find(line) == m.end())
-                m[line]=node->data;
+            for(int i=0;i<n;i++)
+            {
+                pair<Node*, int> curr = q.front();
+                q.pop();
                 
-            if(node->left != NULL)
-                q.push({node->left, line-1});
+                Node* node = curr.first;
+                int col = curr.second;
                 
-            if(node->right != NULL)
-                q.push({node->right, line+1});
+                if(mp.find(col) == mp.end())
+                {
+                    mp[col] = node->data;
+                }
+                
+                if(node->left != NULL)
+                    q.push({node->left, col-1});
+                    
+                if(node->right != NULL)
+                    q.push({node->right, col+1});
+            }
         }
         
-        for(auto it:m)
+        for(auto it: mp)
         {
             ans.push_back(it.second);
         }
@@ -146,7 +149,7 @@ class Solution
 
 
 
-// { Driver Code Starts.
+//{ Driver Code Starts.
 
 int main() {
     int tc;
@@ -163,4 +166,5 @@ int main() {
         cout<<endl;
     }
     return 0;
-}  // } Driver Code Ends
+}
+// } Driver Code Ends
